@@ -1,6 +1,7 @@
-<h1><%= name %></h1>
-
-<% for (var i=0; i<documents.length; i++) {
-	<a href=<%= documents[i] %>i</a>
-<% } %>
-<a href=<%= link[i] %> 
+	<% if(links.length > 0) { %>
+	  <ul>
+	  <% for(var i = 0; i < links.length ; i++) { %>
+	    <li><%= links[i].concept %> </li>
+	  <%   } %>
+	  </ul>
+	<%	} %>

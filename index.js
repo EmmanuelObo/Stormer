@@ -33,26 +33,16 @@ client.call('speechrecognition', data1, function(err1, resp1, body1){
 })
 */
 app.post('/upload_file', upload.single('upload'), function(req, res) {
-	debugger
   var filePath = req.file.path;
   var data1 = {file: path.join(__dirname, filePath)};
   client.call('extractconcepts', data1, function(err1, resp1, body1) {
     if (err1) {
       throw err1;
     } else {
-			debugger
       console.log("------------------------")
       console.log('Extracted concepts')
       var concepts = resp1.body.concepts // array
-      for (var i=0; i<concepts.length; i++) {
-        var concept = concepts[i].concept
-        console.log("~~~~~~~~~~~~~~")
-        console.log(concept)
-					res.render('index', {storm: 'BrainStorm', links: concept}, function(err){
-						if(err)
-							throw err;
-					});
-      }
+			res.render('showcase', {links: concepts})
     }
   })
 })
