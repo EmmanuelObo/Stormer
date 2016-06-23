@@ -1,7 +1,15 @@
 	<% if(links.length > 0) { %>
 	  <ul>
 	  <% for(var i = 0; i < links.length ; i++) { %>
-	    <li><%= links[i].concept %> </li>
+	    <li><h2>Concept[<%= i %>]: </h2><%= links[i].concept %> </li>
+	  <%   } %>
+	  </ul>
+	<%	} %>
+
+	<% if(similar.length > 0) { %>
+	  <ul>
+	  <% for(var i = 0; i < similar.length ; i++) { %>
+	    <li><h2>Ideas[<%= i %>]: </h2><%= similar[i].wikipedia_category %> </li>
 	  <%   } %>
 	  </ul>
 	<%	} %>

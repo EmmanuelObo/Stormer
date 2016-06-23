@@ -1,0 +1,30 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+
+int solution(int X) {
+    int num = X;
+    int lastDigit, count;
+    vector<int>placeValues;
+    count = 1;
+    while(num)
+    {
+    	if(lastDigit == (num%10))
+    	{
+    		placeValues.push_back(count);
+    	}
+    	lastDigit = num%10;
+    	count *= 10;
+    	num /= 10;
+    }
+    
+    return placeValues.size();
+}
+int main() {
+	
+	int s = 3394223752;
+	
+	cout << solution(s);
+	return 0;
+}

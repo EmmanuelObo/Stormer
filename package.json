@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^2.0.0",
     "ejs": "^2.4.2",
     "express": "^4.14.0",
     "havenondemand": "^1.2.1"

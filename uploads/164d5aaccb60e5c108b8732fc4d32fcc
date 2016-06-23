@@ -1,0 +1,122 @@
+#include <iostream>
+using namespace std;
+
+
+struct Node
+{
+	int data;
+	Node *left, *right;
+};
+
+void printLevel(Node * tree, int level);
+void printCurrentLevel(Node * tree, int level);
+Node * newNode(int val)
+{
+	Node * createNode = new Node;
+	(*createNode).data = val;
+	createNode->left = NULL;
+	createNode->right = NULL;
+	return createNode;
+	
+}
+
+Node * insert(int value, Node * tree)
+{
+	//Compare value of the current node
+	//If the value is lesser move to the left
+	//Else if it is greater move to the right
+	//Once you find a spot insert the value
+	Node * current;
+	current = tree;
+	if(current == NULL)
+	{
+		current = newNode(value);
+		return current;
+	}
+
+	if(value < current->data) current->left = insert(value, tree->left); // If value is less than value of current node move left
+	else if(value > current->data) current->right = insert(value, tree->right); // If value is greater than value of current node move right
+	return current;
+}	 
+
+void inorder(Node * tree)
+{
+	if(tree == NULL) return;
+	
+	inorder(tree->left);
+	cout << tree->data << endl;
+	inorder(tree->right);
+}
+
+int count = 0;
+
+void kthSmallest(int k, Node * tree)
+{
+	if(tree == NULL) return;
+	
+	
+	
+	kthSmallest(k, tree->left);
+	count++;
+	if(k == count) cout << k << "th Smallest value in tree is: " << tree->data << endl;
+	cout << "Current count: " << count << endl;
+	kthSmallest(k, tree->right);
+}
+
+int height(Node * tree)
+{
+	if(tree == NULL) return 0;
+	
+	int leftH = height(tree->left);
+	int rightH = height(tree->right);
+	if(leftH > rightH) return (leftH+1);
+	else return (rightH+1);
+}
+
+void printLevel(Node * tree)
+{
+	int level = height(tree);
+	for(int i = 1 ; i < level ; i++)
+	{
+		printCurrentLevel(tree, i);
+	}
+}
+
+void printCurrentLevel(Node * tree, int level)
+{
+	if(tree == NULL) return;
+	if(level == 1)
+	{
+		cout << tree->data << endl;
+	}
+	printCurrentLevel(tree->left, level-1);
+	printCurrentLevel(tree->right, level-1);
+}
+bool checkSubtree(Node * t1, Node * t2)
+{
+	if(t1 == NULL || t2 == NULL) return false;
+	if(t1->data == t2->data)
+	{
+		/*
+		1. Traverse both trees simultaneously
+		2. Check values t each iteration
+		3. If they re equal continue
+		4. Otherwise look through tree1 for another subtree equivalent to that one
+		*/
+	}
+	checkSubtree(t1,t2->left);
+	checkSubtree(t1,t2->right);
+}
+
+int main() {
+	Node * myNode = newNode(5);
+	myNode = insert(4, myNode);
+	myNode = insert(12, myNode);
+	myNode = insert(7, myNode);
+	myNode = insert(1, myNode);
+	myNode = insert(10, myNode);
+	//kthSmallest(2, myNode);
+	
+	int level = height(myNode);
+	printLevel(myNode);
+}
